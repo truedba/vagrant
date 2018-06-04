@@ -1,0 +1,7 @@
+---
+- name: Install and configure percona-server
+  hosts: pipedrive
+  gather_facts: true
+  roles:
+    - percona
+  become: yes

@@ -1,0 +1,6 @@
+all:
+  children:
+    pipedrive:
+      hosts:
+        192.168.168.168:
+          ansible_connection: local

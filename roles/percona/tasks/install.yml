@@ -1,0 +1,23 @@
+- name: Install percona database server
+  action: apt pkg={{ item }} state=latest force=yes
+  with_items:
+          - percona-server-server-5.6
+          - percona-server-client-5.6
+          - percona-toolkit
+          - percona-xtrabackup
+          - python-mysqldb
+          
+- name: change bind address
+  shell: sed -i "s/.*bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
+
+- name: restart mysql
+  service:
+    name: mysql
+    state: restarted
+    
+- mysql_user:
+    name: test
+    password: test
+    priv: '*.*:ALL'
+    host: 192.%.%.%%
+    state: present
